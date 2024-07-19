@@ -19,3 +19,14 @@ jobs:
       with:
         name: build-artifact
         path: dist/*
+
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact
+        with:
+          name: "build-artifact"
+          path: dist
+
+      - name: Publish release
+        run: echo "Uploading!"

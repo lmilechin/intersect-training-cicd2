@@ -7,11 +7,19 @@ jobs:
             - name: Greeting
               run: echo "Hello, World!"
     
-    test-python-3-10:
-        name: Check Python 3.10 on Ubuntu
+    test-python-versions:
+        name: Check Python ${{ matrix.python-version }} on Ubuntu
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                python-version: [3.10, 3.11]
         steps:
             - uses: actions/checkout@v4
+
+            - name: Set up Python ${{ matrix.python-version }}
+              uses: actions/setup-python@v5
+              with:
+                python-version: ${{ matrix.python-version }}
 
             - uses: actions/setup-python@v5
               with:
